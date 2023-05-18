@@ -25,29 +25,29 @@ import com.yizhi.common.utils.R;
 
 /**
  * 专业名称表
- * 
+ *
  * @author dunhf
  * @email 499345515@qq.com
  * @date 2019-07-29 09:06:39
  */
- 
+
 @Controller
 @RequestMapping("/student/major")
 public class MajorController {
 	@Autowired
 	private MajorService majorService;
-	
+
 	@GetMapping()
 	@RequiresPermissions("student:major:major")
 	String Major(){
 	    return "student/major/major";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("student:major:major")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-		//查询列表数据
+
 		if (params.get("sort")!=null) {
 			params.put("sort",BeanHump.camelToUnderline(params.get("sort").toString()));
 		}
@@ -58,7 +58,7 @@ public class MajorController {
 		PageUtils pageUtils = new PageUtils(majorList, total,query.getCurrPage(),query.getPageSize());
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("student:major:add")
 	String add(){
@@ -72,7 +72,7 @@ public class MajorController {
 		model.addAttribute("major", major);
 	    return "student/major/edit";
 	}
-	
+
 	/**
 	 * 保存
 	 */
@@ -97,7 +97,7 @@ public class MajorController {
 		majorService.update(major);
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -111,7 +111,7 @@ public class MajorController {
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
@@ -123,5 +123,5 @@ public class MajorController {
 		majorService.batchRemove(ids);
 		return R.ok();
 	}
-	
+
 }

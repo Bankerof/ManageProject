@@ -14,7 +14,7 @@
  Date: 06/04/2022 15:30:01
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -373,7 +373,7 @@ CREATE TABLE `s_student_info` (
   `edit_time` datetime DEFAULT NULL COMMENT '修改时间',
   `edit_userid` int(11) DEFAULT NULL COMMENT '修改人',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
 -- Records of s_student_info
@@ -406,7 +406,7 @@ CREATE TABLE `sys_class` (
   `tomajor_id` int(11) DEFAULT NULL COMMENT '所属专业',
   `class_num` varchar(255) DEFAULT NULL COMMENT '班级编号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
 -- Records of sys_class
@@ -427,7 +427,7 @@ CREATE TABLE `sys_college` (
   `introduce` varchar(255) DEFAULT NULL COMMENT '学院介绍',
   `college_num` varchar(255) DEFAULT NULL COMMENT '学校编码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
 -- Records of sys_college
@@ -551,7 +551,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `gmt_create` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3181 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=3181 DEFAULT CHARSET=utf8  COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -694,7 +694,7 @@ CREATE TABLE `sys_major` (
   `major_num` varchar(255) DEFAULT NULL COMMENT '专业编号',
   `tocollege_id` int(11) DEFAULT NULL COMMENT '所属学院',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
 -- Records of sys_major
@@ -1112,7 +1112,7 @@ CREATE TABLE `sys_user` (
   `gzh_openid` varchar(50) DEFAULT NULL COMMENT '公众号openid',
   `user_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 ;
 
 -- ----------------------------
 -- Records of sys_user

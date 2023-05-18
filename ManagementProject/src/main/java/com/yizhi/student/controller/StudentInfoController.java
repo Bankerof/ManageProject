@@ -11,6 +11,7 @@ import com.yizhi.common.annotation.Log;
 import com.yizhi.common.controller.BaseController;
 import com.yizhi.common.utils.*;
 import com.yizhi.student.domain.ClassDO;
+import com.yizhi.student.domain.MajorDO;
 import com.yizhi.student.service.ClassService;
 import com.yizhi.student.service.CollegeService;
 import com.yizhi.student.service.MajorService;
@@ -28,24 +29,29 @@ import com.yizhi.student.service.StudentInfoService;
 /**
  * 生基础信息表
  */
- 
+
 @Controller
 @RequestMapping("/student/studentInfo")
 public class StudentInfoController {
 
-	
-
-
 	@Autowired
 	private StudentInfoService studentInfoService;
-    //
+
+	/**
+	 * 保存
+	 *
+	 * @param studentInfoDO 学生信息
+	 * @return {@link R}
+	 */
 	@Log("学生信息保存")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("student:studentInfo:add")
 	public R save(StudentInfoDO studentInfoDO){
-	
-		return null;
+		if(studentInfoService.save(studentInfoDO)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 
 	/**
@@ -56,7 +62,26 @@ public class StudentInfoController {
 	@RequiresPermissions("student:studentInfo:studentInfo")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 
-		return null;
+		//查询列表数据
+		if (params.get("sort")!=null) {
+			params.put("sort",BeanHump.camelToUnderline(params.get("sort").toString()));
+		}
+		if (params.get("name")!=null) {
+            params.put("studentName",params.get("name").toString().trim());
+        }
+		if (params.get("tocollegeId")!=null) {
+			params.put("tocollege",params.get("tocollegeId").toString().trim());
+		}
+		if (params.get("tomajorId")!=null) {
+			params.put("tomajor",params.get("tomajorId").toString().trim());
+		}
+
+		//查询列表数据
+		Query query = new Query(params);
+		List<StudentInfoDO> studentInfoDOList = studentInfoService.list(query);
+		int total = studentInfoService.count(query);
+		PageUtils pageUtils = new PageUtils(studentInfoDOList, total,query.getCurrPage(),query.getPageSize());
+		return pageUtils;
 
 	}
 
@@ -69,8 +94,8 @@ public class StudentInfoController {
 	@PostMapping("/update")
 	@RequiresPermissions("student:studentInfo:edit")
 	public R update(StudentInfoDO studentInfo){
-
-		return null;
+		studentInfoService.update(studentInfo);
+		return R.ok();
 	}
 
 	/**
@@ -81,9 +106,12 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:remove")
 	public R remove( Integer id){
-		return null;
+		if(studentInfoService.remove(id)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
-	
+
 	/**
 	 * 批量删除
 	 */
@@ -92,8 +120,10 @@ public class StudentInfoController {
 	@ResponseBody
 	@RequiresPermissions("student:studentInfo:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
-
-		return null;
+		if(studentInfoService.batchRemove(ids)>0) {
+			return R.ok();
+		}
+		return R.error();
 	}
 
 
@@ -126,5 +156,5 @@ public class StudentInfoController {
 	String add(){
 	    return "student/studentInfo/add";
 	}
-	
+
 }//end class
